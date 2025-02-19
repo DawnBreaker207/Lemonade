@@ -25,11 +25,11 @@ public class SupplierService {
 	Supplier updateSupplier = this.supplierRepository.update(supplierToUpdate);
 	return updateSupplier;
     }
-
-    public Iterable<Supplier> findAll() {
+    
+    public Iterable<Supplier> findAll(){
 	return this.supplierRepository.findAll();
     }
-
+    
     public Supplier findById(int id) {
 	return this.supplierRepository.findById(id);
     }

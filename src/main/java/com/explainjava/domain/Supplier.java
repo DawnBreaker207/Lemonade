@@ -1,11 +1,13 @@
 package main.java.com.explainjava.domain;
 
 public class Supplier {
-    private int id;
+    private static int id;
     private String name;
     private String contactEmail;
 
     public int getId() {
+//	int newId = id;
+//	id++;
 	return id;
     }
 

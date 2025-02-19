@@ -81,7 +81,7 @@ public class UserInterface {
 		handleUpdateSupplier(scanner);
 		break;
 	    case 4:
-		handleShowSuppliers(scanner);
+		handleShowSuppliers();
 		break;
 	    case 5:
 
