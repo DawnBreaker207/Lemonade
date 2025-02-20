@@ -8,7 +8,6 @@ import main.java.com.explainjava.validators.SupplierValidator;
 
 public class SupplierService {
     private SupplierRepository supplierRepository;
-
     private SupplierValidator supplierValidator;
 
     public SupplierService(SupplierRepository supplierRepository, SupplierValidator supplierValidator) {

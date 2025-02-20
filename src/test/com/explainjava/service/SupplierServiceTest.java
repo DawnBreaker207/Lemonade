@@ -1,18 +1,23 @@
 package test.com.explainjava.service;
 
 import main.java.com.explainjava.domain.Supplier;
+import main.java.com.explainjava.exceptions.IDNotUniqueException;
+import main.java.com.explainjava.exceptions.ValidationException;
 import main.java.com.explainjava.repository.SupplierRepository;
 import main.java.com.explainjava.service.SupplierService;
+import main.java.com.explainjava.validators.SupplierValidator;
 
 public class SupplierServiceTest {
     private SupplierService supplierService;
 
-    private void setUp() {
+    private void setUp() throws IDNotUniqueException, ValidationException {
 	SupplierRepository supplierRepository = new SupplierRepository();
-	supplierService = new SupplierService(supplierRepository);
+	SupplierValidator supplierValidator = new SupplierValidator();
+	supplierService = new SupplierService(supplierRepository, supplierValidator);
+
     }
 
-    public void shouldSaveSupplier_whenSavedMethodCalled() {
+    public void shouldSaveSupplier_whenSavedMethodCalled() throws IDNotUniqueException, ValidationException {
 	setUp();
 
 	Supplier savedSupplier = supplierService.saveSupplier(1, "Lemonades", "contact@lemonades.com");
@@ -23,7 +28,7 @@ public class SupplierServiceTest {
 	assert supplierService.findById(1).getId() == 1;
     }
 
-    public void shouldUpdateSupplier_whenUpdateMethodCalled() {
+    public void shouldUpdateSupplier_whenUpdateMethodCalled() throws IDNotUniqueException, ValidationException {
 	setUp();
 
 	Supplier saveSupplier = supplierService.saveSupplier(1, "Lemonades", "contact@lemonades.com");
@@ -36,7 +41,7 @@ public class SupplierServiceTest {
 
     }
 
-    public void shouldRemoveSupplier_whenRemoveMethodCalled() {
+    public void shouldRemoveSupplier_whenRemoveMethodCalled() throws IDNotUniqueException, ValidationException {
 	setUp();
 
 	Supplier savedSupplier = supplierService.saveSupplier(1, "Lemonades", "contact@lemonades.com");
@@ -46,7 +51,7 @@ public class SupplierServiceTest {
 	assert deletedSupplier == null;
     }
 
-    public void shouldFindSupplier_whenFindMethodCalled() {
+    public void shouldFindSupplier_whenFindMethodCalled() throws IDNotUniqueException, ValidationException {
 	setUp();
 
 	supplierService.saveSupplier(1, "Lemonades", "contact@lemonades.com");
@@ -59,7 +64,7 @@ public class SupplierServiceTest {
 	assert secondSupplier.getId() == 2;
     }
 
-    public void testAllService() {
+    public void testAllService() throws IDNotUniqueException, ValidationException {
 	shouldSaveSupplier_whenSavedMethodCalled();
 	shouldUpdateSupplier_whenUpdateMethodCalled();
 	shouldRemoveSupplier_whenRemoveMethodCalled();
