@@ -1,6 +1,8 @@
 package main.java.com.explainjava.repository;
 
 import main.java.com.explainjava.domain.Supplier;
+import main.java.com.explainjava.exceptions.IDNotUniqueException;
+
 import java.util.*;
 
 public class SupplierRepository {
@@ -10,8 +12,11 @@ public class SupplierRepository {
 	this.suppliers = new HashMap<>();
     }
 
-    public Supplier save(Supplier supplier) {
-	this.suppliers.put(supplier.getId(), supplier);
+    public Supplier save(Supplier supplier) throws IDNotUniqueException {
+	if (suppliers.containsKey(supplier.getId())) {
+	    throw new IDNotUniqueException("The id is not unique");
+	}
+	suppliers.put(supplier.getId(), supplier);
 	return supplier;
     }
 

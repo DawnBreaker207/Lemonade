@@ -27,7 +27,7 @@ public class Supplier {
 	return contactEmail;
     }
 
-    public void setEmail(String contactEmail) {
+    public void setContactEmail(String contactEmail) {
 	this.contactEmail = contactEmail;
     }
 

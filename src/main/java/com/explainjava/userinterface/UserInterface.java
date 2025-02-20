@@ -3,6 +3,8 @@ package main.java.com.explainjava.userinterface;
 import java.util.Scanner;
 
 import main.java.com.explainjava.domain.Supplier;
+import main.java.com.explainjava.exceptions.IDNotUniqueException;
+import main.java.com.explainjava.exceptions.ValidationException;
 import main.java.com.explainjava.service.SupplierService;
 
 public class UserInterface {
@@ -101,8 +103,12 @@ public class UserInterface {
 	System.out.print("Contact email: ");
 	String contactEmail = scanner.next();
 
-	Supplier savedSupplier = supplierService.saveSupplier(id, name, contactEmail);
-	System.out.printf("The supplier with ID=%s has been saved \n", savedSupplier.getId());
+	try {
+	    Supplier savedSupplier = supplierService.saveSupplier(id, name, contactEmail);
+	    System.out.printf("The supplier with ID=%s has been saved \n", savedSupplier.getId());
+	} catch (ValidationException | IDNotUniqueException e) {
+	    System.out.println("Error with saving the supplier " + e.getMessage());
+	}
     }
 
     private void handleUpdateSupplier(Scanner scanner) {
