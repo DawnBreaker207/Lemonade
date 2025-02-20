@@ -8,6 +8,7 @@ import main.java.com.explainjava.service.SupplierService;
 import main.java.com.explainjava.userinterface.UserInterface;
 import main.java.com.explainjava.validators.SupplierValidator;
 import test.com.explainjava.domain.SupplierTest;
+import test.com.explainjava.repository.SupplierFileRepositoryTest;
 import test.com.explainjava.repository.SupplierRepositoryTest;
 import test.com.explainjava.service.SupplierServiceTest;
 
@@ -32,6 +33,9 @@ public class MainTest {
 
 	    SupplierRepositoryTest repositoryTests = new SupplierRepositoryTest();
 	    repositoryTests.testAllRepository();
+
+	    SupplierFileRepositoryTest repoFileRepositoryTests = new SupplierFileRepositoryTest("test-file.csv");
+	    repoFileRepositoryTests.testAllSupplierFileRepository();
 
 	    SupplierServiceTest serviceTests = new SupplierServiceTest();
 	    serviceTests.testAllService();
