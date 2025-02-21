@@ -12,13 +12,13 @@ import main.java.com.explainjava.domain.Product;
 import main.java.com.explainjava.domain.Supplier;
 import main.java.com.explainjava.exceptions.IDNotUniqueException;
 
-public class ProductFileRepository extends ProductRepository {
+public class ProductFileRepository extends GenericRepository<Product> {
     private String filename;
 
     public ProductFileRepository(String filename) throws IDNotUniqueException {
 	super();
 	this.filename = filename;
-
+	loadProductsFromFile();
     }
 
     @Override

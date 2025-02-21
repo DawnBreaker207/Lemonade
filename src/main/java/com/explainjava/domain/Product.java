@@ -1,30 +1,24 @@
 package main.java.com.explainjava.domain;
 
-public class Product {
-    private int id;
+public class Product extends Entity {
     private String name;
     private String description;
     private int price;
     private int quantity;
     private Supplier supplier;
 
+    public Product() {
+
+    }
+
     public Product(int id, String name, String description, int price, int quantity, Supplier supplier) {
-	this.id = id;
+	super.id = id;
 	this.name = name;
 	this.description = description;
 	this.price = price;
 	this.quantity = quantity;
 	this.supplier = supplier;
     }
-
-    public int getId() {
-	return id;
-    }
-
-    public void setId(int id) {
-	this.id = id;
-    }
-
     public String getName() {
 	return name;
     }

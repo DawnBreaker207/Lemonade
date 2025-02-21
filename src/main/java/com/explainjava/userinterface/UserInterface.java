@@ -5,15 +5,25 @@ import java.util.Scanner;
 import main.java.com.explainjava.domain.Supplier;
 import main.java.com.explainjava.exceptions.IDNotUniqueException;
 import main.java.com.explainjava.exceptions.ValidationException;
+import main.java.com.explainjava.service.LemonadeService;
+import main.java.com.explainjava.service.OrderService;
+import main.java.com.explainjava.service.ProductService;
 import main.java.com.explainjava.service.SupplierService;
 
 public class UserInterface {
+    private ProductService productService;
     private SupplierService supplierService;
+    private LemonadeService lemonadeService;
+    private OrderService orderService;
 
     private Scanner scanner = new Scanner(System.in);
 
-    public UserInterface(SupplierService supplierService) {
+    public UserInterface(ProductService productService, SupplierService supplierService,
+	    LemonadeService lemonadeService, OrderService orderService) {
+	this.productService = productService;
 	this.supplierService = supplierService;
+	this.lemonadeService = lemonadeService;
+	this.orderService = orderService;
     }
 
     private void showMenu() {

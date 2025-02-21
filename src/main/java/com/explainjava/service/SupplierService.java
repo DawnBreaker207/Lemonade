@@ -3,14 +3,15 @@ package main.java.com.explainjava.service;
 import main.java.com.explainjava.domain.Supplier;
 import main.java.com.explainjava.exceptions.IDNotUniqueException;
 import main.java.com.explainjava.exceptions.ValidationException;
+import main.java.com.explainjava.repository.RepositoryInterface;
 import main.java.com.explainjava.repository.SupplierRepository;
 import main.java.com.explainjava.validators.SupplierValidator;
 
 public class SupplierService {
-    private SupplierRepository supplierRepository;
+    private RepositoryInterface<Supplier> supplierRepository;
     private SupplierValidator supplierValidator;
 
-    public SupplierService(SupplierRepository supplierRepository, SupplierValidator supplierValidator) {
+    public SupplierService(RepositoryInterface supplierRepository, SupplierValidator supplierValidator) {
 	this.supplierRepository = supplierRepository;
 	this.supplierValidator = supplierValidator;
     }
