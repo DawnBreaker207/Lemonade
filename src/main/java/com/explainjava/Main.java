@@ -22,6 +22,7 @@ public class Main {
 	ProductFileRepository productFileRepository = new ProductFileRepository("products.csv");
 	ProductValidator productValidator = new ProductValidator();
 	ProductService productService = new ProductService(productFileRepository, productValidator, supplierService);
+	
 	UserInterface userInterface = new UserInterface(productService, supplierService);
 
 	MainTest mainTest = new MainTest();
