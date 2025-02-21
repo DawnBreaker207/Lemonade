@@ -1,9 +1,14 @@
 package main.java.com.explainjava.userinterface;
 
+import java.util.List;
 import java.util.Scanner;
 
+import main.java.com.explainjava.domain.Lemonade;
+import main.java.com.explainjava.domain.LemonadeRecipe;
+import main.java.com.explainjava.domain.Order;
 import main.java.com.explainjava.domain.Product;
 import main.java.com.explainjava.domain.Supplier;
+import main.java.com.explainjava.dots.DailySalesDTO;
 import main.java.com.explainjava.exceptions.IDNotUniqueException;
 import main.java.com.explainjava.exceptions.ValidationException;
 import main.java.com.explainjava.service.LemonadeService;
@@ -62,6 +67,15 @@ public class UserInterface {
 	System.out.println("What do you want to do ?");
     }
 
+    private void showLemonadesMenu() {
+	System.out.println("Welcome to the Lemonade Stand Administration App.");
+	System.out.println("The Lemonade menu:");
+	System.out.println("1. Display all lemonades");
+	System.out.println("2. Display the recipe for a lemonade");
+	System.out.println("3. Exit");
+	System.out.println("What do you want to do? ");
+    }
+
     public void runMenu() {
 	Scanner scanner = new Scanner(System.in);
 	int option = -1;
@@ -80,7 +94,16 @@ public class UserInterface {
 		runProductsMenu(scanner);
 		break;
 
-	    case 3, 4, 5, 6:
+	    case 3:
+		runLemonadesMenu(scanner);
+		break;
+	    case 4:
+		runOrderOption(scanner);
+		break;
+	    case 5:
+		runDailyReportOption();
+		break;
+	    case 6:
 		System.out.println("Not implemented yet!");
 		break;
 	    case 7:
@@ -88,6 +111,57 @@ public class UserInterface {
 	    }
 	}
 	scanner.close();
+    }
+
+    public void runDailyReportOption() {
+	System.out.println("You want to create a daily report.");
+
+	List<DailySalesDTO> report = orderService.getDailyReport();
+	for (DailySalesDTO day : report) {
+	    String reportLine = "For the day %s the total value of the sells is %d.";
+	    String reportLineFormatted = String.format(reportLine, day.getDayString(), day.getTotalSales());
+	    System.out.println(reportLineFormatted);
+	}
+    }
+
+    public void runOrderOption(Scanner scanner) {
+	System.out.println("You want to create a new order.");
+
+	System.out.print("Order id: ");
+	int id = scanner.nextInt();
+
+	System.out.print("Lemonade id: ");
+	int lemonadeId = scanner.nextInt();
+
+	System.out.print("Quantity: ");
+	int quantity = scanner.nextInt();
+
+	try {
+	    Order order = orderService.saveOrder(id, lemonadeId, quantity);
+	    System.out.printf("The order with ID=%s has been saved \n", order.getId());
+	} catch (ValidationException | IDNotUniqueException e) {
+	    System.out.println("Error with saving the order: " + e.getMessage());
+	}
+    }
+
+    public void runLemonadesMenu(Scanner scanner) {
+	int option = -1;
+	while (option != 3) {
+	    showLemonadesMenu();
+	    option = scanner.nextInt();
+
+	    switch (option) {
+	    case 1:
+		handleShowLemonades();
+		break;
+	    case 2:
+		handleShowLemonadeRecipes(scanner);
+		break;
+	    case 3:
+		break;
+
+	    }
+	}
     }
 
     public void runSuppliersMenu(Scanner scanner) {
@@ -196,6 +270,25 @@ public class UserInterface {
     private void displaySuppliers(Iterable<Supplier> suppliers) {
 	for (Supplier supplier : suppliers) {
 	    System.out.println(supplier);
+	}
+    }
+
+    private void handleShowLemonades() {
+	Iterable<Lemonade> lemonades = lemonadeService.findAll();
+	for (Lemonade lemonade : lemonades) {
+	    System.out.println(lemonade);
+	}
+    }
+
+    private void handleShowLemonadeRecipes(Scanner scanner) {
+	System.out.print("The ID of the lemonade: ");
+	int lemonadeId = scanner.nextInt();
+
+	List<LemonadeRecipe> requestedLemonadeRecipe = lemonadeService.findLemonadeRecipe(lemonadeId);
+	System.out.println("The requested lemonade contains: ");
+	for (LemonadeRecipe lemonadeRecipe : requestedLemonadeRecipe) {
+	    System.out.println("The product " + lemonadeRecipe.getProduct().getName() + " with quantity of "
+		    + lemonadeRecipe.getQuantity());
 	}
     }
 
