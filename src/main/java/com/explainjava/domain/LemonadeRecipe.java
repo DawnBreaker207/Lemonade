@@ -5,7 +5,8 @@ public class LemonadeRecipe extends Entity {
     private Lemonade lemonade;
     private int quantity;
 
-    public LemonadeRecipe(Product product, Lemonade lemonade, int quantity) {
+    public LemonadeRecipe(int id, Product product, Lemonade lemonade, int quantity) {
+	this.id = id;
 	this.product = product;
 	this.lemonade = lemonade;
 	this.quantity = quantity;

@@ -3,17 +3,19 @@ package main.java.com.explainjava.domain;
 public class Supplier extends Entity {
     private static int id;
     private String name;
-    private SupplierType type;
+//    private SupplierType type;
     private String contactEmail;
 
     public Supplier() {
 
     }
 
-    public Supplier(int id, String name, SupplierType type, String contactEmail) {
+    public Supplier(int id, String name, 
+//	    SupplierType type,
+	    String contactEmail) {
 	super.id = id;
 	this.name = name;
-	this.type = type;
+//	this.type = type;
 	this.contactEmail = contactEmail;
     }
 
@@ -25,13 +27,13 @@ public class Supplier extends Entity {
 	this.name = name;
     }
 
-    public SupplierType getType() {
-	return type;
-    }
-
-    public void setType(SupplierType type) {
-	this.type = type;
-    }
+//    public SupplierType getType() {
+//	return type;
+//    }
+//
+//    public void setType(SupplierType type) {
+//	this.type = type;
+//    }
 
     public String getContactEmail() {
 	return contactEmail;
@@ -43,7 +45,9 @@ public class Supplier extends Entity {
 
     @Override
     public String toString() {
-	return "Supplier{" + "id=" + id + ", name='" + name + '\'' + ", type=" + type + ", contactEmail='"
+	return "Supplier{" + "id=" + id + ", name='" + name + '\'' 
+//		+ ", type=" + type 
+		+ ", contactEmail='"
 		+ contactEmail + '\'' + '}';
     }
 }

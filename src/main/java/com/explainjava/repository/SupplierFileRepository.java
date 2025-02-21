@@ -11,7 +11,7 @@ import java.util.List;
 import main.java.com.explainjava.domain.Supplier;
 import main.java.com.explainjava.exceptions.IDNotUniqueException;
 
-public class SupplierFileRepository extends SupplierRepository {
+public class SupplierFileRepository extends GenericRepository<Supplier> {
     private String filename;
 
     public List<Supplier> readSupliersFromFile() {

@@ -5,14 +5,15 @@ import main.java.com.explainjava.domain.Supplier;
 import main.java.com.explainjava.exceptions.IDNotUniqueException;
 import main.java.com.explainjava.exceptions.ValidationException;
 import main.java.com.explainjava.repository.ProductRepository;
+import main.java.com.explainjava.repository.RepositoryInterface;
 import main.java.com.explainjava.validators.ProductValidator;
 
 public class ProductService {
-    private ProductRepository productRepository;
+    private RepositoryInterface<Product> productRepository;
     private ProductValidator productValidator;
     private SupplierService supplierService;
 
-    public ProductService(ProductRepository productRepository, ProductValidator productValidator,
+    public ProductService(RepositoryInterface productRepository, ProductValidator productValidator,
 	    SupplierService supplierService) {
 	this.productRepository = productRepository;
 	this.productValidator = productValidator;
@@ -45,5 +46,9 @@ public class ProductService {
 
     public Iterable<Product> getAll() {
 	return productRepository.findAll();
+    }
+
+    public Product findById(int id) {
+	return this.productRepository.findById(id);
     }
 }

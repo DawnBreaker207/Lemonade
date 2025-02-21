@@ -2,10 +2,12 @@ package main.java.com.explainjava.domain;
 
 public class Lemonade extends Entity {
     private String name;
-    private String totalPrice;
+    private int totalPrice;
 
-    public Lemonade(String name) {
+    public Lemonade(int id, String name, int totalPrice) {
+	this.id = id;
 	this.name = name;
+	this.totalPrice = totalPrice;
     }
 
     public String getName() {
@@ -16,11 +18,11 @@ public class Lemonade extends Entity {
 	this.name = name;
     }
 
-    public String getTotalPrice() {
+    public int getTotalPrice() {
 	return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(int totalPrice) {
 	this.totalPrice = totalPrice;
     }
 }
